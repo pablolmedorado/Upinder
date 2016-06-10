@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 30-may-2016 18:03:25 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="upinder.modelo.Interaccion" table="interaccion" catalog="upinder" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="usuarioByEmisor" class="upinder.modelo.Usuario" fetch="select">
+            <column name="emisor" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuarioByReceptor" class="upinder.modelo.Usuario" fetch="select">
+            <column name="receptor" not-null="true" />
+        </many-to-one>
+        <property name="tipo" type="string">
+            <column name="tipo" length="50" not-null="true" />
+        </property>
+        <property name="fecha" type="timestamp">
+            <column name="fecha" length="19" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

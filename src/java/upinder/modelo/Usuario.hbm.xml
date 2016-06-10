@@ -1,0 +1,129 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 30-may-2016 18:03:25 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="upinder.modelo.Usuario" table="usuario" catalog="upinder" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="tipoSexoByQueBusca" class="upinder.modelo.TipoSexo" fetch="select">
+            <column name="que_busca" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tipoSexoBySexo" class="upinder.modelo.TipoSexo" fetch="select">
+            <column name="sexo" not-null="true" />
+        </many-to-one>
+        <many-to-one name="titulacion" class="upinder.modelo.Titulacion" fetch="select">
+            <column name="titulacion" not-null="true" />
+        </many-to-one>
+        <property name="password" type="string">
+            <column name="password" length="200" not-null="true" />
+        </property>
+        <property name="email" type="string">
+            <column name="email" length="200" not-null="true" />
+        </property>
+        <property name="nombre" type="string">
+            <column name="nombre" length="200" not-null="true" />
+        </property>
+        <property name="apellidos" type="string">
+            <column name="apellidos" length="200" not-null="true" />
+        </property>
+        <property name="fechanac" type="date">
+            <column name="fechanac" length="10" not-null="true" />
+        </property>
+        <property name="fotoPerfil" type="string">
+            <column name="foto_perfil" length="500" />
+        </property>
+        <property name="emailNot" type="boolean">
+            <column name="email_not" not-null="true" />
+        </property>
+        <property name="fechaalta" type="date">
+            <column name="fechaalta" length="10" not-null="true" />
+        </property>
+        <property name="codAct" type="string">
+            <column name="cod_act" length="100" not-null="true" />
+        </property>
+        <property name="activado" type="boolean">
+            <column name="activado" not-null="true" />
+        </property>
+        <set name="mensajesForEmisor" table="mensaje" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="emisor" not-null="true" />
+            </key>
+            <one-to-many class="upinder.modelo.Mensaje" />
+        </set>
+        <set name="matchesForUsuario1" table="match" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario1" not-null="true" />
+            </key>
+            <one-to-many class="upinder.modelo.Match" />
+        </set>
+        <set name="notificacionsForUsuarioAux" table="notificacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario_aux" />
+            </key>
+            <one-to-many class="upinder.modelo.Notificacion" />
+        </set>
+        <set name="matchesForUsuario2" table="match" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario2" not-null="true" />
+            </key>
+            <one-to-many class="upinder.modelo.Match" />
+        </set>
+        <set name="fotos" table="foto" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario" not-null="true" />
+            </key>
+            <one-to-many class="upinder.modelo.Foto" />
+        </set>
+        <set name="comentarios" table="comentario" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario" not-null="true" />
+            </key>
+            <one-to-many class="upinder.modelo.Comentario" />
+        </set>
+        <set name="reaccions" table="reaccion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario" not-null="true" />
+            </key>
+            <one-to-many class="upinder.modelo.Reaccion" />
+        </set>
+        <set name="denunciasForUsuario" table="denuncia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario" not-null="true" />
+            </key>
+            <one-to-many class="upinder.modelo.Denuncia" />
+        </set>
+        <set name="interaccionsForEmisor" table="interaccion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="emisor" not-null="true" />
+            </key>
+            <one-to-many class="upinder.modelo.Interaccion" />
+        </set>
+        <set name="notificacionsForUsuario" table="notificacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuario" not-null="true" />
+            </key>
+            <one-to-many class="upinder.modelo.Notificacion" />
+        </set>
+        <set name="interaccionsForReceptor" table="interaccion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="receptor" not-null="true" />
+            </key>
+            <one-to-many class="upinder.modelo.Interaccion" />
+        </set>
+        <set name="mensajesForReceptor" table="mensaje" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="receptor" not-null="true" />
+            </key>
+            <one-to-many class="upinder.modelo.Mensaje" />
+        </set>
+        <set name="denunciasForDenunciado" table="denuncia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="denunciado" not-null="true" />
+            </key>
+            <one-to-many class="upinder.modelo.Denuncia" />
+        </set>
+    </class>
+</hibernate-mapping>

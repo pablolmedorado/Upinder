@@ -1,0 +1,242 @@
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    <constant name="struts.ui.theme" value="simple" />
+    <!-- Configuration for the default package. -->
+    <package name="default" extends="struts-default">
+        <!-- Login -->
+        <action name="goLogin" method="goLogin" class="upinder.action.UpinderAction">
+            <result name="success">WEB-INF/login.jsp</result>
+            <result name="error">WEB-INF/error.jsp</result>
+        </action>
+        <action name="doLogin" method="doLogin" class="upinder.action.UpinderAction">
+            <result name="success" type="redirectAction">goDashboard</result>
+            <result name="error">WEB-INF/login.jsp</result>
+        </action>
+        
+        <!-- Logout -->
+        <action name="doLogout" method="doLogout" class="upinder.action.UpinderAction">
+            <result name="success" type="redirectAction">goLogin</result>
+            <result name="error">WEB-INF/error.jsp</result>
+        </action>
+        
+        <!-- Alta -->
+        <action name="goAlta" method="goAlta" class="upinder.action.UpinderAction">
+            <interceptor-ref name="store">
+                <param name="operationMode">RETRIEVE</param>
+            </interceptor-ref>
+            <result name="success">WEB-INF/alta.jsp</result>
+            <result name="error">WEB-INF/error.jsp</result>
+        </action>
+        <action name="doAlta" class="upinder.action.AltaUsuarioAction">
+            <interceptor-ref name="store">
+                <param name="operationMode">STORE</param>
+            </interceptor-ref>
+            <interceptor-ref name="defaultStack" />
+            <result name="success" type="redirectAction">goLogin</result>
+            <result name="input" type="redirectAction">goAlta</result>
+            <result name="error">WEB-INF/error.jsp</result>
+        </action>
+        
+        <!-- Validacion alta -->
+        <action name="validarUsuario" class="upinder.action.ValidarUsuarioAction">
+            <result name="success" type="redirectAction">goLogin</result>
+            <result name="error">WEB-INF/error.jsp</result>
+        </action>
+        
+        <!-- Perfil -->
+        <action name="goPerfil" method="goPerfil" class="upinder.action.UpinderAction">
+            <result name="success">WEB-INF/perfil.jsp</result>
+            <result name="error">WEB-INF/error.jsp</result>
+            <result name="login" type="redirectAction">goLogin</result>
+        </action>
+        <action name="doSubirFoto" class="upinder.action.SubirFotoAction">
+            <interceptor-ref name="fileUpload">
+                <param name="maximumSize">3097152</param>
+                <param name="allowedTypes">
+                    image/png,image/gif,image/jpeg,image/jpg
+                </param>
+            </interceptor-ref>
+            <interceptor-ref name="defaultStack"></interceptor-ref>
+            <result name="success" type="redirectAction">goPerfil</result>
+            <result name="input" type="redirectAction">goPerfil</result>
+            <result name="error">WEB-INF/error.jsp</result>
+            <result name="login" type="redirectAction">goLogin</result>
+        </action>
+        <action name="deleteFoto" method="deleteFoto" class="upinder.action.UpinderAction">
+            <result name="success" type="redirectAction">goPerfil</result>
+            <result name="error">WEB-INF/error.jsp</result>
+            <result name="login" type="redirectAction">goLogin</result>
+            <result name="permission">WEB-INF/permission.jsp</result>
+        </action>
+        <action name="doModificarPerfil" method="doModificarPerfil" class="upinder.action.UpinderAction">
+            <result name="success" type="redirectAction">goPerfil</result>
+            <result name="error">WEB-INF/error.jsp</result>
+            <result name="login" type="redirectAction">goLogin</result>
+        </action>
+        <action name="doEliminarUsuario" method="doEliminarUsuario" class="upinder.action.UpinderAction">
+            <result name="success" type="redirectAction">goLogin</result>
+            <result name="error">WEB-INF/error.jsp</result>
+            <result name="login" type="redirectAction">goLogin</result>
+        </action>
+        <action name="doClearDislikes" method="doClearDislikes" class="upinder.action.UpinderAction">
+            <result name="success" type="redirectAction">goPerfil</result>
+            <result name="error">WEB-INF/error.jsp</result>
+            <result name="login" type="redirectAction">goLogin</result>
+        </action>
+        <action name="doSetFotoPerfil" method="doSetFotoPerfil" class="upinder.action.UpinderAction">
+            <result name="success" type="redirectAction">goPerfil</result>
+            <result name="error">WEB-INF/error.jsp</result>
+            <result name="login" type="redirectAction">goLogin</result>
+            <result name="permission">WEB-INF/permission.jsp</result>
+        </action>
+        
+        <!-- Dashboard -->
+        <action name="goDashboard" method="goDashboard" class="upinder.action.UpinderAction">
+            <result name="success">WEB-INF/dashboard.jsp</result>
+            <result name="error">WEB-INF/error.jsp</result>
+            <result name="login" type="redirectAction">goLogin</result>
+        </action>
+        
+        <!-- Vista usuario -->
+        <action name="goUser" method="goUser" class="upinder.action.UpinderAction">
+            <result name="success">WEB-INF/user.jsp</result>
+            <result name="error">WEB-INF/error.jsp</result>
+            <result name="login" type="redirectAction">goLogin</result>
+            <result name="permission">WEB-INF/permission.jsp</result>
+        </action>
+        
+        <!-- Interacciones -->
+        <action name="doLike" method="doLike" class="upinder.action.UpinderAction">
+            <result name="success" type="redirectAction">goDashboard</result>
+            <result name="error">WEB-INF/error.jsp</result>
+            <result name="login" type="redirectAction">goLogin</result>
+        </action>
+        <action name="doSuperlike" method="doSuperlike" class="upinder.action.UpinderAction">
+            <result name="success" type="redirectAction">goDashboard</result>
+            <result name="error">WEB-INF/error.jsp</result>
+            <result name="login" type="redirectAction">goLogin</result>
+        </action>
+        <action name="doDislike" method="doDislike" class="upinder.action.UpinderAction">
+            <result name="success" type="redirectAction">goDashboard</result>
+            <result name="error">WEB-INF/error.jsp</result>
+            <result name="login" type="redirectAction">goLogin</result>
+        </action>
+        
+        <!-- Mensajes -->
+        <action name="goMensajes" method="goMensajes" class="upinder.action.UpinderAction">
+            <result name="success">WEB-INF/mensajes.jsp</result>
+            <result name="error">WEB-INF/error.jsp</result>
+            <result name="login" type="redirectAction">goLogin</result>
+            <result name="permission">WEB-INF/permission.jsp</result>
+        </action>
+        <action name="newMsg" method="newMsg" class="upinder.action.UpinderAction">
+            <result name="success" type="redirectAction">
+                <param name="actionName">goMensajes</param>
+                <param name="id">${id}</param>
+            </result>
+            <result name="error">WEB-INF/error.jsp</result>
+            <result name="login" type="redirectAction">goLogin</result>
+            <result name="input" type="redirectAction">
+                <param name="actionName">goMensajes</param>
+                <param name="id">${id}</param>
+            </result>
+        </action>
+        <action name="doDeleteMsg" method="doDeleteMsg" class="upinder.action.UpinderAction">
+            <result name="success" type="redirectAction">
+                <param name="actionName">goMensajes</param>
+                <param name="id">${id}</param>
+            </result>
+            <result name="error">WEB-INF/error.jsp</result>
+            <result name="login" type="redirectAction">goLogin</result>
+            <result name="permission">WEB-INF/permission.jsp</result>
+        </action>
+        
+        <!-- Notificaciones -->
+        <action name="goNotificaciones" method="goNotificaciones" class="upinder.action.UpinderAction">
+            <result name="success">WEB-INF/notificaciones.jsp</result>
+            <result name="error">WEB-INF/error.jsp</result>
+            <result name="login" type="redirectAction">goLogin</result>
+        </action>
+        <action name="doEliminarNotificaciones" method="doEliminarNotificaciones" class="upinder.action.UpinderAction">
+            <result name="success" type="redirectAction">goDashboard</result>
+            <result name="error">WEB-INF/error.jsp</result>
+            <result name="login" type="redirectAction">goLogin</result>
+        </action>
+        
+        <!-- Vista foto -->
+        <action name="goFoto" method="goFoto" class="upinder.action.UpinderAction">
+            <result name="success">WEB-INF/foto.jsp</result>
+            <result name="error">WEB-INF/error.jsp</result>
+            <result name="login" type="redirectAction">goLogin</result>
+            <result name="permission">WEB-INF/permission.jsp</result>
+        </action>
+        <action name="newComentarioFoto" method="newComentarioFoto" class="upinder.action.UpinderAction">
+            <result name="success" type="redirectAction">
+                <param name="actionName">goFoto</param>
+                <param name="id">${id}</param>
+            </result>
+            <result name="error">WEB-INF/error.jsp</result>
+            <result name="login" type="redirectAction">goLogin</result>
+            <result name="input" type="redirectAction">
+                <param name="actionName">goFoto</param>
+                <param name="id">${id}</param>
+            </result>
+        </action>
+        <action name="doReactionFoto" method="doReactionFoto" class="upinder.action.UpinderAction">
+            <result name="success" type="redirectAction">
+                <param name="actionName">goFoto</param>
+                <param name="id">${id}</param>
+            </result>
+            <result name="error">WEB-INF/error.jsp</result>
+            <result name="login" type="redirectAction">goLogin</result>
+        </action>
+        <action name="doDeleteReactionFoto" method="doDeleteReactionFoto" class="upinder.action.UpinderAction">
+            <result name="success" type="redirectAction">
+                <param name="actionName">goFoto</param>
+                <param name="id">${id}</param>
+            </result>
+            <result name="error">WEB-INF/error.jsp</result>
+            <result name="login" type="redirectAction">goLogin</result>
+        </action>
+        <action name="doDeleteComentario" method="doDeleteComentario" class="upinder.action.UpinderAction">
+            <result name="success" type="redirectAction">
+                <param name="actionName">goFoto</param>
+                <param name="id">${id}</param>
+            </result>
+            <result name="error">WEB-INF/error.jsp</result>
+            <result name="login" type="redirectAction">goLogin</result>
+            <result name="permission">WEB-INF/permission.jsp</result>
+        </action>
+        
+        <!-- Matches -->
+        <action name="goMatches" method="goMatches" class="upinder.action.UpinderAction">
+            <result name="success">WEB-INF/matches.jsp</result>
+            <result name="error">WEB-INF/error.jsp</result>
+            <result name="login" type="redirectAction">goLogin</result>
+        </action>
+        <action name="doDeleteMatch" method="doDeleteMatch" class="upinder.action.UpinderAction">
+            <result name="success" type="redirectAction">goMatches</result>
+            <result name="error">WEB-INF/error.jsp</result>
+            <result name="login" type="redirectAction">goLogin</result>
+        </action>
+        
+        <!-- Denuncia -->
+        <action name="goDenuncia" method="goDenuncia" class="upinder.action.UpinderAction">
+            <result name="success">WEB-INF/denuncia.jsp</result>
+            <result name="error">WEB-INF/error.jsp</result>
+            <result name="login" type="redirectAction">goLogin</result>
+        </action>
+        <action name="doDenuncia" method="doDenuncia" class="upinder.action.UpinderAction">
+            <result name="success" type="redirectAction">goMatches</result>
+            <result name="error">WEB-INF/error.jsp</result>
+            <result name="login" type="redirectAction">goLogin</result>
+            <result name="input" type="redirectAction">
+                <param name="actionName">goDenuncia</param>
+                <param name="id">${id}</param>
+            </result>
+        </action>
+    </package>
+</struts>

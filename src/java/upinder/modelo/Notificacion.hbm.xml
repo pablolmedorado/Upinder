@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 30-may-2016 18:03:25 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="upinder.modelo.Notificacion" table="notificacion" catalog="upinder" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="foto" class="upinder.modelo.Foto" fetch="select">
+            <column name="foto_aux" />
+        </many-to-one>
+        <many-to-one name="usuarioByUsuarioAux" class="upinder.modelo.Usuario" fetch="select">
+            <column name="usuario_aux" />
+        </many-to-one>
+        <many-to-one name="usuarioByUsuario" class="upinder.modelo.Usuario" fetch="select">
+            <column name="usuario" not-null="true" />
+        </many-to-one>
+        <property name="tipo" type="string">
+            <column name="tipo" length="50" not-null="true" />
+        </property>
+        <property name="texto" type="string">
+            <column name="texto" length="500" not-null="true" />
+        </property>
+        <property name="fechaCreacion" type="timestamp">
+            <column name="fecha_creacion" length="19" not-null="true" />
+        </property>
+        <property name="fechaLectura" type="timestamp">
+            <column name="fecha_lectura" length="19" />
+        </property>
+    </class>
+</hibernate-mapping>

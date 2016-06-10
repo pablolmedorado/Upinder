@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 30-may-2016 18:03:25 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="upinder.modelo.Denuncia" table="denuncia" catalog="upinder" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="tipoDenuncia" class="upinder.modelo.TipoDenuncia" fetch="select">
+            <column name="tipo" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuarioByUsuario" class="upinder.modelo.Usuario" fetch="select">
+            <column name="usuario" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuarioByDenunciado" class="upinder.modelo.Usuario" fetch="select">
+            <column name="denunciado" not-null="true" />
+        </many-to-one>
+        <property name="declaracion" type="string">
+            <column name="declaracion" length="2000" not-null="true" />
+        </property>
+        <property name="fechaDenuncia" type="date">
+            <column name="fecha_denuncia" length="10" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

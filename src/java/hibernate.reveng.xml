@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd">
+<hibernate-reverse-engineering>
+  <schema-selection match-catalog="upinder"/>
+  <table-filter match-name="denuncia"/>
+  <table-filter match-name="titulacion"/>
+  <table-filter match-name="notificacion"/>
+  <table-filter match-name="tipo_denuncia"/>
+  <table-filter match-name="interaccion"/>
+  <table-filter match-name="comentario"/>
+  <table-filter match-name="usuario"/>
+  <table-filter match-name="tipo_sexo"/>
+  <table-filter match-name="match"/>
+  <table-filter match-name="reaccion"/>
+  <table-filter match-name="foto"/>
+  <table-filter match-name="mensaje"/>
+</hibernate-reverse-engineering>

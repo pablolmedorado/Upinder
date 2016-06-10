@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 30-may-2016 18:03:25 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="upinder.modelo.Foto" table="foto" catalog="upinder" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="usuario" class="upinder.modelo.Usuario" fetch="select">
+            <column name="usuario" not-null="true" />
+        </many-to-one>
+        <property name="titulo" type="string">
+            <column name="titulo" length="100" not-null="true" />
+        </property>
+        <property name="url" type="string">
+            <column name="url" length="500" not-null="true" />
+        </property>
+        <property name="dePerfil" type="boolean">
+            <column name="de_perfil" not-null="true" />
+        </property>
+        <set name="reaccions" table="reaccion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="foto" />
+            </key>
+            <one-to-many class="upinder.modelo.Reaccion" />
+        </set>
+        <set name="comentarios" table="comentario" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="foto" />
+            </key>
+            <one-to-many class="upinder.modelo.Comentario" />
+        </set>
+        <set name="notificacions" table="notificacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="foto_aux" />
+            </key>
+            <one-to-many class="upinder.modelo.Notificacion" />
+        </set>
+    </class>
+</hibernate-mapping>

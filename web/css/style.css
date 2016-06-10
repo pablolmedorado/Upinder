@@ -1,0 +1,11 @@
+ul.side-nav li.logo {
+    text-align: center;
+    margin-top: 15px;
+    margin-bottom: 90px;
+}
+span.badge.new:after {
+    content: " nuevas";
+}
+.collection .collection-item.avatar {
+    min-height: 64px;
+}
